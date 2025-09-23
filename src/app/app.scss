@@ -1,0 +1,337 @@
+// Christmas Countdown App Styles
+.christmas-app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  font-family: 'Georgia', serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+// Header styles
+.header {
+  margin-bottom: 3rem;
+  
+  .title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin: 0 0 1rem 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    margin: 0;
+    color: #f0f8ff;
+    opacity: 0.9;
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3);
+  }
+  to {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 215, 0, 0.4);
+  }
+}
+
+// Weeks section
+.weeks-section {
+  margin-bottom: 3rem;
+  
+  .weeks-card {
+    background: linear-gradient(145deg, rgba(220, 20, 60, 0.2), rgba(34, 139, 34, 0.2));
+    border-radius: 20px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    min-width: 200px;
+  }
+  
+  .time-unit-large {
+    .number {
+      font-size: clamp(3rem, 10vw, 5rem);
+      font-weight: bold;
+      color: #ffd700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 0.5rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .label {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 300;
+    }
+  }
+}
+
+// Main countdown grid
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.time-unit {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 15px;
+  padding: 1.5rem 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .number {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.5rem;
+    animation: countAnimation 1s ease-in-out;
+  }
+  
+  .label {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+}
+
+@keyframes countAnimation {
+  0% { transform: scale(1.2); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+// Christmas message
+.christmas-message {
+  background: linear-gradient(145deg, rgba(220, 20, 60, 0.3), rgba(34, 139, 34, 0.3));
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: 3rem;
+  
+  h2 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    margin: 0 0 1rem 0;
+    color: #ffd700;
+    animation: celebrate 1s ease-in-out infinite;
+  }
+  
+  p {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    margin: 0;
+    color: #fff;
+  }
+}
+
+@keyframes celebrate {
+  0%, 100% { transform: rotate(-2deg) scale(1); }
+  50% { transform: rotate(2deg) scale(1.05); }
+}
+
+// Footer
+.footer {
+  p {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: #f0f8ff;
+    opacity: 0.8;
+    margin: 0;
+  }
+}
+
+// Snowflake animation
+.snowflakes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: #fff;
+  font-size: 1em;
+  animation: snowfall linear infinite;
+  opacity: 0.8;
+  
+  &:nth-child(1) {
+    left: 10%;
+    animation-duration: 3s;
+    animation-delay: 0s;
+    font-size: 1.5em;
+  }
+  
+  &:nth-child(2) {
+    left: 20%;
+    animation-duration: 6s;
+    animation-delay: 1s;
+    font-size: 1em;
+  }
+  
+  &:nth-child(3) {
+    left: 30%;
+    animation-duration: 4s;
+    animation-delay: 0.5s;
+    font-size: 1.2em;
+  }
+  
+  &:nth-child(4) {
+    left: 40%;
+    animation-duration: 5s;
+    animation-delay: 1.8s;
+    font-size: 1.3em;
+  }
+  
+  &:nth-child(5) {
+    left: 50%;
+    animation-duration: 7s;
+    animation-delay: 0.3s;
+    font-size: 1.1em;
+  }
+  
+  &:nth-child(6) {
+    left: 60%;
+    animation-duration: 4.5s;
+    animation-delay: 2s;
+    font-size: 1.4em;
+  }
+  
+  &:nth-child(7) {
+    left: 70%;
+    animation-duration: 3.5s;
+    animation-delay: 1.2s;
+    font-size: 1em;
+  }
+  
+  &:nth-child(8) {
+    left: 80%;
+    animation-duration: 6.5s;
+    animation-delay: 0.8s;
+    font-size: 1.6em;
+  }
+  
+  &:nth-child(9) {
+    left: 90%;
+    animation-duration: 5.5s;
+    animation-delay: 1.5s;
+    font-size: 1.2em;
+  }
+  
+  &:nth-child(10) {
+    left: 5%;
+    animation-duration: 4.2s;
+    animation-delay: 2.3s;
+    font-size: 1.3em;
+  }
+}
+
+@keyframes snowfall {
+  from {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .countdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .weeks-section .weeks-card {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .time-unit {
+    padding: 1rem 0.5rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .christmas-message {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .time-unit {
+    padding: 1.5rem 1rem;
+  }
+}
+
+// Accessibility
+@media (prefers-reduced-motion: reduce) {
+  .snowflake,
+  .time-unit .number,
+  .time-unit-large .number,
+  .header .title,
+  .christmas-message h2 {
+    animation: none;
+  }
+  
+  .time-unit:hover {
+    transform: none;
+  }
+}
