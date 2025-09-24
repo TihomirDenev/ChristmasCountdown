@@ -7,6 +7,17 @@
   </div>
 
   <div class="container">
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+      <button 
+        class="theme-button" 
+        (click)="switchTheme()"
+        [title]="'Switch to ' + themeService.getNextTheme().name"
+        aria-label="Switch Christmas theme">
+        {{ themeService.currentTheme().icon }} Choose Theme
+      </button>
+    </div>
+
     <!-- Header -->
     <header class="header">
       <h1 class="title">🎄 Christmas Countdown 🎄</h1>
