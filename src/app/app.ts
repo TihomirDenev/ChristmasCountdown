@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from './theme.service';
 
 interface CountdownTime {
   days: number;
@@ -23,6 +24,8 @@ export class App implements OnInit, OnDestroy {
   
   private intervalId?: number;
 
+  constructor(public themeService: ThemeService) {}
+
   ngOnInit() {
     this.updateCountdown();
     this.intervalId = window.setInterval(() => {
@@ -41,6 +44,10 @@ export class App implements OnInit, OnDestroy {
     const currentYear = now.getFullYear();
     const christmas = new Date(currentYear, 11, 25);
     return now > christmas ? currentYear + 1 : currentYear;
+  }
+
+  protected switchTheme(): void {
+    this.themeService.switchToNextTheme();
   }
 
   private updateCountdown() {
