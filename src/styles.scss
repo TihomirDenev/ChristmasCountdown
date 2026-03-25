@@ -1,17 +1,35 @@
-/* Global styles for Christmas Countdown App */
-* {
+@use 'styles/tokens.scss';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Georgia', serif;
-  overflow-x: hidden;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-html, body {
-  height: 100%;
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

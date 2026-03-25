@@ -1,0 +1,145 @@
+// Design tokens — single source of truth for all colors used across the app.
+// Use these CSS custom properties in component SCSS files instead of raw hex values.
+
+// ── Dark / Winter Night theme ─────────────────────────────────────────────────
+// Deep midnight blue backgrounds with gold/snow-white accents — classic Christmas night sky.
+:root,
+[data-theme='dark'] {
+  // Background layers
+  --color-background: #0a0e1a;
+  --color-surface: #0f1829;
+  --color-surface-hover: #162035;
+
+  // Borders
+  --color-border: #1e2d4a;
+
+  // Text
+  --color-text-primary: #f5f5f5;
+  --color-text-muted: #a8b8cc;
+  --color-text-subtle: #4a6080;
+  // Text on dark surface (header/footer bg)
+  --color-surface-text: #f5f5f5;
+  --color-surface-text-muted: #a8b8cc;
+
+  // Brand accent — warm Christmas gold
+  --color-accent: #f5d774;
+  --color-accent-hover: #d4af37;
+  --color-accent-subtle: rgba(245, 215, 116, 0.12);
+  --color-accent-glow: rgba(245, 215, 116, 0.25);
+
+  // Card surfaces — slightly elevated dark blue
+  --color-card: #111b2e;
+  --color-card-hover: #162035;
+  --color-card-border: rgba(245, 215, 116, 0.18);
+  --color-card-border-hover: rgba(245, 215, 116, 0.5);
+
+  // Heading gradient — snow white → light gold → rich gold
+  --color-heading-grad-start: #fff9d6;
+  --color-heading-grad-mid: #f5d774;
+  --color-heading-grad-end: #d4af37;
+
+  // Card gradient stops
+  --color-card-grad-end: #0a0e1a;
+  --color-card-hover-grad-end: #162035;
+
+  // Christmas red accent
+  --color-christmas-red: #dc143c;
+  --color-christmas-red-subtle: rgba(220, 20, 60, 0.15);
+  --color-christmas-green: #228b22;
+  --color-christmas-green-subtle: rgba(34, 139, 34, 0.15);
+
+  // Gold
+  --color-gold: #d4af37;
+  --color-gold-light: #f5d774;
+
+  // Semantic status colors
+  --color-success: #00e676;
+  --color-success-subtle: rgba(0, 230, 118, 0.1);
+  --color-error: #ff5252;
+  --color-error-subtle: rgba(255, 82, 82, 0.08);
+
+  // Misc shadows / overlays
+  --color-shadow-card: rgba(0, 0, 0, 0.5);
+  --color-shadow-accent: rgba(245, 215, 116, 0.12);
+  --color-inset-highlight: rgba(255, 255, 255, 0.04);
+
+  // Snowflake color
+  --color-snowflake: rgba(255, 255, 255, 0.8);
+
+  // Page background (used on :host of home page)
+  --color-page-bg: linear-gradient(135deg, #0a0e1a 0%, #0f1829 50%, #162035 100%);
+}
+
+// ── Festive / Christmas Light theme ──────────────────────────────────────────
+// Richer & moodier Christmas palette — like a candlelit Christmas room:
+//   Holly green   #165B33   (deep Christmas tree green)
+//   Dark green    #0F3D22   (shadowed pine, for card depth)
+//   Christmas red #BB2528   (classic Santa red)
+//   Gold ribbon   #F8B229   (warm gift-ribbon gold)
+//   Candlelit bg  #D4A96A → #C4945A gradient (warm amber parchment)
+//   Card surface  #BF8A45   (deeper toffee — contrast against bg)
+[data-theme='festive'] {
+  // Background — deep candlelit amber (applied as gradient in component)
+  --color-background: #c4945a;
+  --color-surface: #0f3d22;
+  --color-surface-hover: #165b33;
+
+  // Borders — burnished gold
+  --color-border: #a0722a;
+
+  // Text
+  --color-text-primary: #1a0f00;
+  --color-text-muted: #2e1f00;
+  --color-text-subtle: #7a5c2e;
+  // Text on dark green surface
+  --color-surface-text: #fdf3dc;
+  --color-surface-text-muted: #a8d4b0;
+
+  // Brand accent — Christmas gold ribbon
+  --color-accent: #f8b229;
+  --color-accent-hover: #e09a10;
+  --color-accent-subtle: rgba(248, 178, 41, 0.2);
+  --color-accent-glow: rgba(248, 178, 41, 0.45);
+
+  // Card surfaces — deep toffee with contrast against warm bg
+  --color-card: #bf8a45;
+  --color-card-hover: #b07a35;
+  --color-card-border: rgba(100, 60, 10, 0.6);
+  --color-card-border-hover: rgba(160, 100, 20, 0.9);
+
+  // Heading gradient
+  --color-heading-grad-start: #165b33;
+  --color-heading-grad-mid: #bb2528;
+  --color-heading-grad-end: #f8b229;
+
+  // Card gradient stops
+  --color-card-grad-end: #a06c2a;
+  --color-card-hover-grad-end: #8f5c1a;
+
+  // Christmas red & green accents
+  --color-christmas-red: #bb2528;
+  --color-christmas-red-subtle: rgba(187, 37, 40, 0.25);
+  --color-christmas-green: #165b33;
+  --color-christmas-green-subtle: rgba(22, 91, 51, 0.25);
+
+  // Gold
+  --color-gold: #e09a10;
+  --color-gold-light: #f8b229;
+
+  // Semantic
+  --color-success: #165b33;
+  --color-success-subtle: rgba(22, 91, 51, 0.08);
+  --color-error: #bb2528;
+  --color-error-subtle: rgba(187, 37, 40, 0.07);
+
+  // Shadows — deep and warm
+  --color-shadow-card: rgba(80, 30, 0, 0.35);
+  --color-shadow-accent: rgba(248, 178, 41, 0.2);
+  --color-inset-highlight: rgba(255, 220, 120, 0.15);
+
+  // Snowflake — warm creamy white, lighter than the amber bg
+  --color-snowflake: rgba(255, 250, 235, 0.55);
+
+  // Page background (gradient applied in component)
+  --color-page-bg: #c4945a;
+}

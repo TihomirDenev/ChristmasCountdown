@@ -1,115 +1,93 @@
-# 🎄 Christmas Countdown 🎄
+<div align="center">
 
-A beautiful and interactive Christmas countdown application built with Angular. Displays the time remaining until Christmas with a festive design, animated snowflakes, and a responsive layout that works on all devices.
+<img src="src/assets/icon.png" alt="Christmas Countdown" width="100" />
+
+# 🎄 Christmas Countdown
+
+### How long until Santa arrives? Find out in real time.
+
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-christmas--countdown--omega.vercel.app-brightgreen?style=flat-square)](https://christmas-countdown-omega.vercel.app/) 
+[![Angular](https://img.shields.io/badge/Angular-21-dd0031?style=flat-square&logo=angular&logoColor=white)](https://angular.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![SCSS](https://img.shields.io/badge/SCSS-styling-cc6699?style=flat-square&logo=sass&logoColor=white)](https://sass-lang.com) [![Prettier](https://img.shields.io/badge/Prettier-formatted-f7b93e?style=flat-square&logo=prettier&logoColor=black)](https://prettier.io) [![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)](LICENSE)
+
+</div>
+
+---
 
 ## ✨ Features
 
-- 🎅 Real-time countdown to Christmas
-- ❄️ Animated snowflakes for a festive touch
-- 📱 Fully responsive design
-- 🎨 Beautiful holiday-themed UI
-- ⏱️ Displays time remaining in weeks, days, hours, minutes, and seconds
-- 🎉 Special Christmas Day message
+- 🕐 **Real-time countdown** — weeks, days, hours, minutes, and seconds ticking live
+- 🎅 **Christmas Day message** — a special greeting when the big day arrives
+- ❄️ **Animated snowflakes** — falling snow on every visit
+- 🌗 **Two themes** — *Dark* (midnight blue + gold) and *Festive* (holly green + Santa red + snow white), toggled with a button fixed in the top-right corner
+- 💾 **Persistent theme** — preference saved to `localStorage`
+- 📱 **Fully responsive** — works on all screen sizes
+
+---
+
+## 🛠️ Tech Stack
+
+| | |
+|---|---|
+| **Framework** | Angular 21 — standalone components, signals, no Zone.js |
+| **Language** | TypeScript 5.9 |
+| **Styling** | SCSS + CSS custom properties for theming |
+| **Icons** | Bootstrap Icons |
+| **Formatting** | Prettier |
+| **Hosting** | Vercel |
+
+---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+**Prerequisites:** Node.js 18+, npm 10+
 
-- Node.js (v16 or later)
-- npm (v9 or later) or Yarn
-- Angular CLI (v20.3.2 or later)
+```bash
+# 1. Install dependencies
+npm install
 
-### Installation
+# 2. Start the dev server
+npm start
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/christmas-countdown.git
-   cd christmas-countdown
-   ```
+Then open **http://localhost:4200/** in your browser.
 
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+### Available Scripts
 
-3. Start the development server:
-   ```bash
-   ng serve
-   ```
+| Command | Description |
+|---|---|
+| `npm start` | Start local dev server |
+| `npm run build` | Production build → `dist/` |
+| `npm run watch` | Build in watch mode |
 
-4. Open your browser and navigate to `http://localhost:4200/`
+---
 
-## 🛠️ Development
+## 📁 Project Structure
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+```
+src/
+├── app/                        # App shell (routing, config)
+├── libs/
+│   ├── components/
+│   │   └── snowflakes/         # ❄️ Snowflake animation component
+│   ├── constants/              # App-wide constants
+│   ├── models/                 # TypeScript interfaces
+│   ├── pages/
+│   │   └── home/               # 🏠 Main countdown page
+│   └── services/
+│       ├── countdown.service   # ⏱️ Timer logic (signals)
+│       └── theme.service       # 🎨 Dark / Festive theme toggle
+└── styles/
+    └── tokens.scss             # CSS custom properties for both themes
+```
 
-### Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-### Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## 📦 Technologies Used
-
-- Angular 20
-- TypeScript
-- SCSS for styling
-- RxJS for reactive programming
-- Angular Animations
-
-## 📱 Browser Support
-
-The application is tested and works on:
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS/Android)
-
-## 🎨 Customization
-
-You can customize the following aspects of the application:
-
-### Changing the Theme
-
-Edit the colors and styles in `src/styles.scss` to match your preferred Christmas theme.
-
-### Modifying Animations
-
-Snowflake animations can be adjusted in the `app.component.scss` file by modifying the `@keyframes` rules.
-
-## 🔧 Troubleshooting
-
-If you encounter any issues, try the following:
-
-1. Clear your browser cache
-2. Run `npm install` to ensure all dependencies are installed
-3. Check the browser's console for any error messages
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT — see [LICENSE](LICENSE) for details.
 
-## 🎁 Acknowledgements
+---
 
-- Snowflake animation inspired by various CSS animation techniques
-- Built with ❤️ and ☕
-
-## 🚀 Future Enhancements
-
-- [ ] Add sound effects
-- [ ] Include an advent calendar feature
-- [ ] Add more festive animations
-- [ ] Create a dark mode theme
-
-## 🙏 Support
-
-If you like this project, please consider giving it a ⭐️ on GitHub!
+<div align="center">
+  Built with ❤️ and a little Christmas magic 🎁
+</div>

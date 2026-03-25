@@ -13,22 +13,27 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve"
+    "module": "preserve",
+    "baseUrl": "src",
+    "paths": {
+      "@libs/components/*": ["libs/components/*"],
+      "@libs/pages/*": ["libs/pages/*"],
+      "@libs/models/*": ["libs/models/*"],
+      "@libs/constants/*": ["libs/constants/*"],
+      "@libs/services/*": ["libs/services/*"],
+      "@libs/helpers/*": ["libs/helpers/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
     "strictTemplates": true
   },
   "files": [],
   "references": [
     {
       "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
     }
   ]
 }

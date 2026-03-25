@@ -1,0 +1,72 @@
+<app-snowflakes />
+
+<button
+  class="theme-toggle"
+  (click)="themeService.toggle()"
+  [title]="themeService.theme() === 'dark' ? 'Switch to Festive theme' : 'Switch to Dark theme'"
+  [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to Festive theme' : 'Switch to Dark theme'"
+>
+  @if (themeService.theme() === 'dark') {
+    <i class="bi bi-sun-fill"></i>
+  } @else {
+    <i class="bi bi-moon-stars-fill"></i>
+  }
+</button>
+
+<div class="home-container">
+  <section class="hero">
+    <h1 class="hero-title">🎄 Christmas Countdown 🎄</h1>
+    <p class="hero-subtitle">Time until Christmas {{ countdownService.christmasYear() }}</p>
+  </section>
+
+  @if (countdownService.isChristmas()) {
+    <div class="christmas-message">
+      <h2 class="christmas-message-title">Merry Christmas!</h2>
+      <p class="christmas-message-text">Christmas is here! Enjoy this magical day!</p>
+    </div>
+  } @else {
+    <div class="weeks-section">
+      <div class="weeks-card">
+        <div class="weeks-number">{{ countdownService.countdown().weeks }}</div>
+        <div class="weeks-label">
+          {{ countdownService.countdown().weeks === 1 ? 'Week' : 'Weeks' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="countdown-grid">
+      <div class="time-unit">
+        <div class="time-unit-number">{{ countdownService.countdown().days }}</div>
+        <div class="time-unit-label">
+          {{ countdownService.countdown().days === 1 ? 'Day' : 'Days' }}
+        </div>
+      </div>
+
+      <div class="time-unit">
+        <div class="time-unit-number">{{ countdownService.countdown().hours }}</div>
+        <div class="time-unit-label">
+          {{ countdownService.countdown().hours === 1 ? 'Hour' : 'Hours' }}
+        </div>
+      </div>
+
+      <div class="time-unit">
+        <div class="time-unit-number">{{ countdownService.countdown().minutes }}</div>
+        <div class="time-unit-label">
+          {{ countdownService.countdown().minutes === 1 ? 'Minute' : 'Minutes' }}
+        </div>
+      </div>
+
+      <div class="time-unit">
+        <div class="time-unit-number">{{ countdownService.countdown().seconds }}</div>
+        <div class="time-unit-label">
+          {{ countdownService.countdown().seconds === 1 ? 'Second' : 'Seconds' }}
+        </div>
+      </div>
+    </div>
+  }
+
+  <footer class="page-footer">
+    <p>&#10024; Wishing you a magical Christmas season! &#10024;</p>
+    <p class="page-footer-copy">&copy; {{ countdownService.currentYear() }} Christmas Countdown</p>
+  </footer>
+</div>
