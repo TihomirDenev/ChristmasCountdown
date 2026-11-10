@@ -21,7 +21,8 @@
       "@libs/models/*": ["libs/models/*"],
       "@libs/constants/*": ["libs/constants/*"],
       "@libs/services/*": ["libs/services/*"],
-      "@libs/helpers/*": ["libs/helpers/*"]
+      "@libs/helpers/*": ["libs/helpers/*"],
+      "@libs/directives/*": ["libs/directives/*"]
     }
   },
   "angularCompilerOptions": {
