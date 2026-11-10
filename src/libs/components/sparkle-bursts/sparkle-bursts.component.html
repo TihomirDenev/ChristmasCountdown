@@ -1,0 +1,32 @@
+@for (burst of bursts(); track burst.id) {
+  <div
+    class="sparkle-burst"
+    [class.sparkle-burst-firework]="burst.isFirework"
+    [style.left.px]="burst.x"
+    [style.top.px]="burst.y"
+  >
+    <span class="sparkle-ring"></span>
+    @for (particle of burst.particles; track $index) {
+      <span
+        class="sparkle-particle"
+        [style.--sparkle-angle]="particle.angleDeg + 'deg'"
+        [style.--sparkle-distance]="particle.distancePx + 'px'"
+        [style.--sparkle-size]="particle.sizePx + 'px'"
+        [style.--sparkle-color]="particle.color"
+      ></span>
+    }
+  </div>
+}
+
+@for (piece of confettiPieces(); track $index) {
+  <span
+    class="confetti-piece"
+    [style.left.%]="piece.leftPercent"
+    [style.width.px]="piece.widthPx"
+    [style.background]="piece.color"
+    [style.animation-delay.s]="piece.delayS"
+    [style.animation-duration.s]="piece.durationS"
+    [style.--confetti-drift]="piece.driftPx + 'px'"
+    [style.--confetti-spin]="piece.spinDeg + 'deg'"
+  ></span>
+}

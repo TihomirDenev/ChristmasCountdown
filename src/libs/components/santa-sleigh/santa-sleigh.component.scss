@@ -1,0 +1,84 @@
+:host {
+  --sleigh-color: var(--scene-silhouette);
+
+  position: relative;
+  display: block;
+
+  &.is-golden {
+    --sleigh-color: var(--color-gold-light);
+
+    .sleigh-svg {
+      filter: drop-shadow(0 0 6px var(--color-gold-shine))
+        drop-shadow(0 0 22px var(--color-accent-glow));
+    }
+
+    .sleigh-trail {
+      height: 5px;
+      box-shadow: 0 0 22px 6px var(--color-accent-glow);
+    }
+  }
+}
+
+.sleigh-svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  fill: var(--sleigh-color);
+  animation: sleigh-bob 1.6s ease-in-out infinite alternate;
+}
+
+.sleigh-lines,
+.sleigh-reins {
+  fill: none;
+  stroke: var(--sleigh-color);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.sleigh-reins {
+  stroke-width: 0.8;
+}
+
+.reindeer {
+  animation: reindeer-gallop 0.45s ease-in-out infinite alternate;
+}
+
+.sleigh-trail {
+  position: absolute;
+  top: 62%;
+  right: 88%;
+  width: 260%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--color-gold-light));
+  box-shadow: 0 0 12px 2px var(--color-accent-glow);
+  opacity: 0.85;
+  mask-image: repeating-linear-gradient(90deg, #000 0 10px, transparent 10px 16px);
+}
+
+@keyframes sleigh-bob {
+  from {
+    transform: translateY(-4px) rotate(-1.5deg);
+  }
+
+  to {
+    transform: translateY(4px) rotate(1deg);
+  }
+}
+
+@keyframes reindeer-gallop {
+  from {
+    transform: translateY(-1.5px);
+  }
+
+  to {
+    transform: translateY(1.5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sleigh-svg,
+  .reindeer {
+    animation: none;
+  }
+}

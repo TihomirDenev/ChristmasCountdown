@@ -1,0 +1,27 @@
+<span class="sleigh-trail"></span>
+<svg class="sleigh-svg" viewBox="0 0 220 60">
+  <path class="sleigh-reins" d="M84 25 L140 33 L174 33 L208 33" />
+
+  @for (offsetX of reindeerOffsets; track offsetX; let reindeerIndex = $index) {
+    <g [attr.transform]="'translate(' + offsetX + ' 20)'">
+      <g class="reindeer" [style.animation-delay.s]="reindeerIndex * -0.15">
+        <ellipse cx="12" cy="14" rx="11" ry="4.5" />
+        <path d="M20 12 L25 4 L29 6 L25 14 Z" />
+        <ellipse cx="29" cy="4.5" rx="4.2" ry="2.4" />
+        <path
+          class="sleigh-lines"
+          d="M27 3 L25 -3 M25.8 0 L22.5 -1 M25 -3 L23 -6 M25 -3 L28 -6 M3 17 L-3 23 M6 17 L1 24 M17 17 L23 22 M20 17 L27 20 M1 13 L-3 11"
+        />
+      </g>
+    </g>
+  }
+
+  <g>
+    <circle cx="26" cy="20" r="9" />
+    <ellipse cx="50" cy="21" rx="8" ry="8" />
+    <circle cx="49" cy="10" r="4.5" />
+    <path d="M45 8 L53 7 L39 1 Z" />
+    <path d="M12 38 Q10 26 22 26 L72 26 Q80 19 87 22 L82 36 Q60 40 12 38 Z" />
+    <path class="sleigh-lines" d="M6 44 L80 44 Q92 44 92 34 M24 38 L24 44 M64 38 L64 44" />
+  </g>
+</svg>

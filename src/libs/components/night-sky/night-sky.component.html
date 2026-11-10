@@ -1,0 +1,137 @@
+<div class="sky-layer sky-stars">
+  @for (star of stars; track $index) {
+    <span
+      class="sky-star"
+      [class.sky-star-bright]="star.isBright"
+      [style.left.%]="star.leftPercent"
+      [style.top.%]="star.topPercent"
+      [style.width.px]="star.sizePx"
+      [style.height.px]="star.sizePx"
+      [style.animation-duration.s]="star.twinkleDurationS"
+      [style.animation-delay.s]="-star.twinkleDelayS"
+    ></span>
+  }
+
+  @for (shootingStar of shootingStars; track $index) {
+    <span
+      class="shooting-star"
+      [style.left.%]="shootingStar.leftPercent"
+      [style.top.%]="shootingStar.topPercent"
+      [style.animation-duration.s]="shootingStar.durationS"
+      [style.animation-delay.s]="shootingStar.delayS"
+    ></span>
+  }
+
+  @for (meteor of meteors(); track $index) {
+    <span
+      class="meteor"
+      [style.left.%]="meteor.leftPercent"
+      [style.top.%]="meteor.topPercent"
+      [style.animation-delay.s]="meteor.delayS"
+    ></span>
+  }
+</div>
+
+<div class="sky-layer aurora">
+  <span class="aurora-band aurora-band-primary"></span>
+  <span class="aurora-band aurora-band-secondary"></span>
+  <span class="aurora-band aurora-band-tertiary"></span>
+</div>
+
+<div class="sky-layer moon-layer">
+  <div class="moon"></div>
+</div>
+
+<app-santa-sleigh class="sleigh" />
+
+@if (sceneEffectsService.isActive('sleigh-flyby')) {
+  <app-santa-sleigh class="sleigh-flyby" [isGolden]="true" />
+}
+
+<div class="landscape">
+  <svg
+    class="landscape-layer landscape-layer-far"
+    viewBox="0 0 1600 400"
+    preserveAspectRatio="xMidYMax slice"
+  >
+    <path class="mountain" [attr.d]="mountainPath" />
+    @for (snowCap of mountainSnowCaps; track $index) {
+      <polygon class="mountain-snow" [attr.points]="snowCap" />
+    }
+  </svg>
+
+  <div class="landscape-mist"></div>
+
+  <svg
+    class="landscape-layer landscape-layer-mid"
+    viewBox="0 0 1600 400"
+    preserveAspectRatio="xMidYMax slice"
+  >
+    <path class="forest-hill" [attr.d]="forestHillPath" />
+    @for (tree of farTrees; track $index) {
+      <g class="pine-tree" [attr.transform]="tree.transform">
+        <rect x="-2" y="-16" width="4" height="16" />
+        <polygon
+          points="0,-100 12,-70 6,-70 16,-45 8,-45 20,-15 -20,-15 -8,-45 -16,-45 -6,-70 -12,-70"
+        />
+      </g>
+    }
+  </svg>
+
+  <svg
+    class="landscape-layer landscape-layer-near"
+    viewBox="0 0 1600 400"
+    preserveAspectRatio="xMidYMax slice"
+  >
+    <path class="snow-ground" [attr.d]="snowGroundPath" />
+
+    @for (house of villageHouses; track $index; let houseIndex = $index) {
+      <g [attr.transform]="'translate(' + house.x + ' ' + house.y + ') scale(' + house.scale + ')'">
+        @if (house.hasSmoke) {
+          @for (delay of smokePuffDelays; track delay) {
+            <circle
+              class="chimney-smoke"
+              cx="40"
+              cy="-64"
+              r="4"
+              [style.animation-delay.s]="delay"
+            />
+          }
+        }
+        <rect class="house-wall" x="36" y="-60" width="8" height="18" />
+        <rect class="house-wall" x="0" y="-36" width="52" height="36" />
+        <polygon class="house-wall" points="-6,-34 26,-58 58,-34" />
+        <polygon class="house-roof-snow" points="-8,-33 26,-61 60,-33 54,-31 26,-53 -2,-31" />
+        <rect
+          class="house-window"
+          x="7"
+          y="-27"
+          width="11"
+          height="10"
+          [style.animation-delay.s]="houseIndex * 0.9"
+        />
+        <rect
+          class="house-window"
+          x="34"
+          y="-27"
+          width="11"
+          height="10"
+          [style.animation-delay.s]="houseIndex * 0.9 + 0.4"
+        />
+        <path class="house-window-frame" d="M12.5 -27 V-17 M7 -22 H18 M39.5 -27 V-17 M34 -22 H45" />
+        <rect class="house-door" x="21" y="-17" width="10" height="17" />
+      </g>
+    }
+
+    @for (tree of nearTrees; track $index) {
+      <g class="pine-tree pine-tree-near" [attr.transform]="tree.transform">
+        <rect x="-2" y="-16" width="4" height="16" />
+        <polygon
+          points="0,-100 12,-70 6,-70 16,-45 8,-45 20,-15 -20,-15 -8,-45 -16,-45 -6,-70 -12,-70"
+        />
+      </g>
+    }
+
+    <path class="snow-ground-shadow" [attr.d]="snowGroundShadowPath" />
+  </svg>
+</div>

@@ -1,0 +1,533 @@
+:host {
+  --moon-size: clamp(72px, 8vw, 124px);
+  --moon-top: 9%;
+  --sleigh-width: clamp(150px, 15vw, 230px);
+
+  // On phones the title fills the width, so the moon moves up into the free space above it.
+  @media (max-width: 640px) {
+    --moon-size: 54px;
+    --moon-top: 70px;
+  }
+
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 120%, var(--scene-sky-bottom) 0%, transparent 60%),
+    linear-gradient(
+      180deg,
+      var(--scene-sky-top) 0%,
+      var(--scene-sky-mid) 55%,
+      var(--scene-sky-bottom) 100%
+    );
+}
+
+// ─── Parallax layers ──────────────────────────────────────────────────────────
+
+.sky-layer,
+.landscape-layer {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.sky-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.sky-stars {
+  transform: translate(calc(var(--parallax-x, 0px) * -0.15), calc(var(--parallax-y, 0px) * -0.15));
+}
+
+.moon-layer {
+  transform: translate(calc(var(--parallax-x, 0px) * -0.25), calc(var(--parallax-y, 0px) * -0.2));
+}
+
+// ─── Stars ────────────────────────────────────────────────────────────────────
+
+.sky-star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  opacity: var(--scene-star-opacity);
+  animation: star-twinkle ease-in-out infinite alternate;
+
+  &.sky-star-bright {
+    box-shadow:
+      0 0 6px 2px rgba(255, 255, 255, 0.55),
+      0 0 16px 5px rgba(245, 215, 116, 0.25);
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 170px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+  opacity: 0;
+  transform-origin: right center;
+  filter: drop-shadow(0 0 6px #fff);
+  animation: shooting-star linear infinite;
+}
+
+// ─── Aurora ───────────────────────────────────────────────────────────────────
+
+.aurora {
+  bottom: 40%;
+  mix-blend-mode: screen;
+  filter: blur(34px);
+}
+
+.aurora-band {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  border-radius: 50%;
+  animation: aurora-drift 16s ease-in-out infinite alternate;
+
+  &.aurora-band-primary {
+    top: 6%;
+    height: 34%;
+    background: linear-gradient(
+      90deg,
+      transparent 5%,
+      var(--scene-aurora-primary) 30%,
+      var(--scene-aurora-secondary) 55%,
+      transparent 85%
+    );
+  }
+
+  &.aurora-band-secondary {
+    top: 22%;
+    height: 22%;
+    background: linear-gradient(
+      90deg,
+      transparent 15%,
+      var(--scene-aurora-secondary) 45%,
+      var(--scene-aurora-primary) 70%,
+      transparent 95%
+    );
+    animation-duration: 22s;
+    animation-direction: alternate-reverse;
+  }
+
+  &.aurora-band-tertiary {
+    top: 0;
+    height: 18%;
+    background: linear-gradient(
+      90deg,
+      transparent 30%,
+      var(--scene-aurora-primary) 60%,
+      transparent 90%
+    );
+    animation-duration: 12s;
+  }
+}
+
+// ─── Moon ─────────────────────────────────────────────────────────────────────
+
+.moon {
+  position: absolute;
+  top: var(--moon-top);
+  right: 12%;
+  width: var(--moon-size);
+  height: var(--moon-size);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 62%, rgba(150, 130, 90, 0.18) 0 9%, transparent 10%),
+    radial-gradient(circle at 62% 35%, rgba(150, 130, 90, 0.15) 0 7%, transparent 8%),
+    radial-gradient(circle at 68% 70%, rgba(150, 130, 90, 0.12) 0 5%, transparent 6%),
+    radial-gradient(circle at 35% 35%, #fffef6 0%, var(--scene-moon) 55%, #e6d6a2 100%);
+  box-shadow:
+    0 0 50px 12px var(--scene-moon-glow),
+    0 0 140px 50px var(--scene-moon-glow),
+    inset -10px -8px 24px rgba(160, 130, 70, 0.25);
+  animation: moon-glow 6s ease-in-out infinite alternate;
+}
+
+// ─── Santa's sleigh ───────────────────────────────────────────────────────────
+
+.sleigh {
+  position: absolute;
+  top: calc(var(--moon-top) + var(--moon-size) * 0.5 - var(--sleigh-width) * 0.14);
+  left: 0;
+  width: var(--sleigh-width);
+  transform: translateX(-130%);
+  animation: sleigh-flight 42s linear 5s infinite;
+}
+
+// ─── Landscape ────────────────────────────────────────────────────────────────
+
+.landscape {
+  position: absolute;
+  left: -30px;
+  right: -30px;
+  bottom: -12px;
+  height: clamp(240px, 44vh, 480px);
+}
+
+.landscape-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.landscape-layer-far {
+  transform: translate(calc(var(--parallax-x, 0px) * -0.3), calc(var(--parallax-y, 0px) * -0.1));
+}
+
+.landscape-layer-mid {
+  transform: translate(calc(var(--parallax-x, 0px) * -0.6), calc(var(--parallax-y, 0px) * -0.25));
+}
+
+.landscape-layer-near {
+  transform: translate(calc(var(--parallax-x, 0px) * -1), calc(var(--parallax-y, 0px) * -0.4));
+}
+
+.landscape-mist {
+  position: absolute;
+  inset: 30% 0 25%;
+  background: linear-gradient(0deg, transparent, var(--scene-sky-bottom) 55%, transparent);
+  opacity: 0.45;
+  filter: blur(12px);
+  animation: mist-drift 14s ease-in-out infinite alternate;
+}
+
+.mountain {
+  fill: var(--scene-mountain);
+}
+
+.mountain-snow {
+  fill: var(--scene-mountain-snow);
+  opacity: 0.7;
+}
+
+.forest-hill,
+.pine-tree {
+  fill: var(--scene-forest);
+}
+
+.pine-tree-near {
+  fill: var(--scene-forest-near);
+  stroke: var(--scene-mountain-snow);
+  stroke-width: 0.7;
+  stroke-opacity: 0.35;
+}
+
+.snow-ground {
+  fill: var(--scene-snow-ground);
+}
+
+.snow-ground-shadow {
+  fill: var(--scene-snow-shadow);
+}
+
+.house-wall,
+.house-door {
+  fill: var(--scene-house-wall);
+}
+
+.house-roof-snow {
+  fill: var(--scene-snow-ground);
+}
+
+.house-window {
+  fill: var(--scene-window-light);
+  filter: drop-shadow(0 0 5px var(--scene-window-light));
+  animation: window-flicker 4.5s ease-in-out infinite;
+}
+
+.house-window-frame {
+  stroke: var(--scene-house-wall);
+  stroke-width: 1.2;
+}
+
+.chimney-smoke {
+  fill: var(--scene-snow-ground);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: smoke-rise 3.9s ease-out infinite;
+}
+
+// ─── Scene effects (played from the advent calendar) ──────────────────────────
+
+.sleigh-flyby {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: clamp(260px, 32vw, 460px);
+  animation: sleigh-flyby 5.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) both;
+}
+
+.meteor {
+  position: absolute;
+  width: 220px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, #fff);
+  filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px var(--color-gold-light));
+  opacity: 0;
+  transform-origin: right center;
+  animation: meteor-fall 1.6s ease-in infinite;
+}
+
+.sky-stars,
+.aurora {
+  transition:
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 1.2s ease;
+}
+
+:host(.effect-starburst) .sky-stars {
+  filter: brightness(2.2) drop-shadow(0 0 3px #fff);
+}
+
+:host(.effect-aurora-flare) .aurora {
+  transform: scaleY(1.35);
+  filter: blur(26px) saturate(1.8) brightness(1.7);
+}
+
+.moon {
+  transition:
+    transform 1.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 1.6s ease;
+}
+
+:host(.effect-supermoon) .moon {
+  transform: scale(1.7);
+  box-shadow:
+    0 0 80px 30px var(--scene-moon-glow),
+    0 0 240px 110px var(--scene-moon-glow),
+    inset -10px -8px 24px rgba(160, 130, 70, 0.25);
+}
+
+.house-window {
+  transition:
+    fill 1s ease,
+    filter 1s ease;
+}
+
+:host(.effect-village-glow) .house-window {
+  fill: #fff6c8;
+  filter: drop-shadow(0 0 6px var(--scene-window-light))
+    drop-shadow(0 0 18px var(--scene-window-light));
+}
+
+// Warm light spilling from the village over the snow.
+.landscape::after {
+  content: '';
+  position: absolute;
+  right: 2%;
+  bottom: -12%;
+  width: 46%;
+  height: 60%;
+  background: radial-gradient(closest-side, rgba(255, 200, 100, 0.45), transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+:host(.effect-village-glow) .landscape::after {
+  opacity: 1;
+}
+
+:host(.effect-snow-globe) {
+  animation: snow-globe-shake 0.9s ease-in-out;
+}
+
+// ─── Animations ───────────────────────────────────────────────────────────────
+
+@keyframes sleigh-flyby {
+  0% {
+    transform: translate(-130%, 14vh) rotate(-6deg);
+  }
+
+  50% {
+    transform: translate(calc(50vw - 50%), -2vh) rotate(-2deg);
+  }
+
+  100% {
+    transform: translate(calc(100vw + 40%), -18vh) rotate(-8deg);
+  }
+}
+
+@keyframes meteor-fall {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(32deg) scaleX(0.3);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(520px, 320px) rotate(32deg) scaleX(1);
+  }
+}
+
+@keyframes snow-globe-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  15% {
+    transform: translate(-14px, 6px) rotate(-1.2deg) scale(1.05);
+  }
+
+  30% {
+    transform: translate(12px, -6px) rotate(1deg) scale(1.05);
+  }
+
+  45% {
+    transform: translate(-10px, 4px) rotate(-0.8deg) scale(1.05);
+  }
+
+  60% {
+    transform: translate(8px, -3px) rotate(0.6deg) scale(1.04);
+  }
+
+  75% {
+    transform: translate(-4px, 2px) rotate(-0.3deg) scale(1.02);
+  }
+}
+
+@keyframes star-twinkle {
+  from {
+    opacity: calc(0.2 * var(--scene-star-opacity));
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: var(--scene-star-opacity);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes shooting-star {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(28deg) scaleX(0.2);
+  }
+
+  2% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0;
+    transform: translate(420px, 220px) rotate(28deg) scaleX(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(420px, 220px) rotate(28deg) scaleX(1);
+  }
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translateX(-6%) rotate(-8deg) scaleY(0.8);
+  }
+
+  50% {
+    transform: translateX(3%) rotate(-3deg) scaleY(1.25);
+  }
+
+  100% {
+    transform: translateX(8%) rotate(-10deg) scaleY(0.9);
+  }
+}
+
+@keyframes moon-glow {
+  from {
+    filter: brightness(0.96);
+  }
+
+  to {
+    filter: brightness(1.06);
+  }
+}
+
+@keyframes sleigh-flight {
+  0% {
+    transform: translateX(-130%);
+  }
+
+  22%,
+  100% {
+    transform: translateX(calc(100vw + 30%));
+  }
+}
+
+@keyframes mist-drift {
+  from {
+    transform: translateX(-3%);
+  }
+
+  to {
+    transform: translateX(3%);
+  }
+}
+
+@keyframes window-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 0.82;
+  }
+
+  50% {
+    opacity: 0.95;
+  }
+
+  55% {
+    opacity: 0.78;
+  }
+}
+
+@keyframes smoke-rise {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+
+  20% {
+    opacity: 0.35;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(12px, -42px) scale(2.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host(.effect-snow-globe),
+  .sky-star,
+  .shooting-star,
+  .aurora-band,
+  .moon,
+  .sleigh,
+  .landscape-mist,
+  .house-window,
+  .chimney-smoke {
+    animation: none;
+  }
+
+  .shooting-star,
+  .meteor,
+  .sleigh,
+  .sleigh-flyby {
+    display: none;
+  }
+}

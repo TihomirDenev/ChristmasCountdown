@@ -1,0 +1,13 @@
+<svg class="fairy-wire" viewBox="0 0 1000 60" preserveAspectRatio="none">
+  <path [attr.d]="wirePath" vector-effect="non-scaling-stroke" />
+</svg>
+
+@for (bulb of bulbs; track bulb.index) {
+  <span
+    class="fairy-bulb"
+    [style.left.%]="bulb.leftPercent"
+    [style.top.px]="bulb.topPx"
+    [style.--bulb-color]="bulb.color"
+    [style.--bulb-index]="bulb.index"
+  ></span>
+}
