@@ -1,0 +1,60 @@
+<header class="advent-header">
+  <p class="advent-eyebrow">A little magic every day</p>
+  <h2 class="advent-title">Advent Calendar</h2>
+  <p class="advent-hint">
+    @if (isPreviewMode) {
+      <span class="advent-preview-badge">
+        <i class="bi bi-eye-fill"></i>
+        Preview mode: every door is unlocked and nothing is saved
+      </span>
+    } @else if (isAdventSeason()) {
+      Open today's door and watch the sky come alive.
+    } @else {
+      Every door hides a magic show. They unlock from 1 December.
+    }
+  </p>
+</header>
+
+<div class="advent-grid">
+  @for (door of doors(); track door.day) {
+    <button
+      class="advent-door advent-door-{{ door.color }}"
+      type="button"
+      [class.is-open]="door.isOpen"
+      [class.is-locked]="!door.isUnlocked"
+      [class.is-today]="door.isToday"
+      [class.is-shaking]="shakingDay() === door.day"
+      [attr.aria-label]="getDoorAriaLabel(door)"
+      (click)="onDoorClick(door)"
+    >
+      <span class="advent-surprise">
+        <i class="bi {{ door.show.icon }} advent-surprise-icon"></i>
+        <span class="advent-surprise-title">{{ door.show.title }}</span>
+        <span class="advent-surprise-replay">
+          <i class="bi bi-arrow-repeat"></i>
+          Replay
+        </span>
+      </span>
+
+      <span class="advent-door-panel">
+        <span class="advent-door-number">{{ door.day }}</span>
+        @if (!door.isUnlocked) {
+          <i class="bi bi-lock-fill advent-door-lock"></i>
+        }
+        @if (door.isToday && !door.isOpen) {
+          <span class="advent-door-today">Today</span>
+        }
+      </span>
+    </button>
+  }
+</div>
+
+<div
+  class="advent-toast"
+  role="status"
+  aria-live="polite"
+  [class.is-visible]="isLockedMessageVisible()"
+>
+  <i class="bi bi-lock-fill"></i>
+  <span>{{ lockedMessage() }}</span>
+</div>
