@@ -1,0 +1,30 @@
+<div class="journey">
+  <div class="journey-header">
+    <span class="journey-title">
+      <i class="bi bi-signpost-2-fill"></i>
+      Santa's journey
+    </span>
+    <span class="journey-percent">{{ progress() | number: '1.1-1' }}%</span>
+  </div>
+
+  <div
+    class="journey-track"
+    role="progressbar"
+    aria-label="Progress from last Christmas to this Christmas"
+    [attr.aria-valuenow]="progress() | number: '1.0-0'"
+    aria-valuemin="0"
+    aria-valuemax="100"
+  >
+    <div class="journey-fill" [style.width.%]="progress()">
+      <span class="journey-marker">
+        <i class="bi bi-star-fill"></i>
+      </span>
+    </div>
+    <i class="bi bi-gift-fill journey-goal"></i>
+  </div>
+
+  <div class="journey-footer">
+    <span>Christmas {{ previousChristmasYear() }}</span>
+    <span>Christmas {{ christmasYear() }}</span>
+  </div>
+</div>

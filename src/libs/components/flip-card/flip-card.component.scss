@@ -1,0 +1,211 @@
+:host {
+  // The parent can set --flip-height to size every card (and its separators) together.
+  --flip-card-height: var(--flip-height, clamp(5.6rem, 13vw, 9.5rem));
+  --flip-radius: 18px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+// ─── Frame with a light that travels around the border ────────────────────────
+
+.flip-card-frame {
+  padding: 2px;
+  border-radius: calc(var(--flip-radius) + 2px);
+  background-color: var(--color-card-border);
+  background-image: conic-gradient(
+    from var(--border-angle),
+    transparent 0deg,
+    var(--color-gold-shine) 40deg,
+    transparent 100deg,
+    transparent 180deg,
+    var(--color-christmas-red) 220deg,
+    transparent 280deg
+  );
+  box-shadow:
+    0 24px 50px -12px var(--color-shadow-card),
+    0 0 50px -14px var(--color-accent-glow);
+  animation: border-spin 6s linear infinite;
+}
+
+// ─── Flip card ────────────────────────────────────────────────────────────────
+
+.flip-card {
+  position: relative;
+  width: calc(var(--flip-card-height) * (0.22 + 0.4 * var(--flip-digits)));
+  height: var(--flip-card-height);
+  border-radius: var(--flip-radius);
+  perspective: calc(var(--flip-card-height) * 5);
+  font-family: var(--font-digits);
+  font-size: calc(var(--flip-card-height) * 0.84);
+
+  // Hinge line across the middle of the card.
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(50% - 1px);
+    height: 2px;
+    z-index: 3;
+    background: var(--color-flip-hinge);
+    box-shadow: 0 1px 0 var(--color-inset-highlight);
+  }
+}
+
+.flip-half {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+
+  &.flip-half-top {
+    top: 0;
+    border-radius: var(--flip-radius) var(--flip-radius) 0 0;
+    background: linear-gradient(180deg, var(--color-flip-face-top), var(--color-flip-face-bottom));
+    box-shadow: inset 0 1px 0 var(--color-inset-highlight);
+    transform-origin: 50% 100%;
+
+    .flip-value {
+      top: 0;
+    }
+  }
+
+  &.flip-half-bottom {
+    bottom: 0;
+    border-radius: 0 0 var(--flip-radius) var(--flip-radius);
+    background: linear-gradient(180deg, var(--color-flip-face-bottom), var(--color-flip-face-top));
+    transform-origin: 50% 0;
+
+    .flip-value {
+      bottom: 0;
+    }
+  }
+
+  // Shadow that darkens a flap while it is folding.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.55));
+    opacity: 0;
+  }
+}
+
+.flip-value {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--flip-card-height);
+  line-height: var(--flip-card-height);
+  text-align: center;
+  letter-spacing: 0.03em;
+  background: linear-gradient(
+    180deg,
+    var(--color-gold-shine) 15%,
+    var(--color-gold-light) 45%,
+    var(--color-gold) 60%,
+    var(--color-gold-dark) 90%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.flip-flap-top {
+  z-index: 2;
+  animation: flip-top-down 0.3s cubic-bezier(0.55, 0.06, 0.68, 0.19) both;
+
+  &::after {
+    animation: flap-shade-in 0.3s ease-in both;
+  }
+}
+
+.flip-flap-bottom {
+  z-index: 2;
+  animation: flip-bottom-down 0.38s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s both;
+
+  &::after {
+    animation: flap-shade-out 0.38s ease-out 0.3s both;
+  }
+}
+
+.flip-label {
+  padding-left: 0.35em;
+  font-weight: 600;
+  font-size: clamp(0.68rem, 1.4vw, 0.85rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+// ─── Animations ───────────────────────────────────────────────────────────────
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+@keyframes flip-top-down {
+  from {
+    transform: rotateX(0deg);
+  }
+
+  to {
+    transform: rotateX(-90deg);
+  }
+}
+
+@keyframes flip-bottom-down {
+  0% {
+    transform: rotateX(90deg);
+  }
+
+  75% {
+    transform: rotateX(-10deg);
+  }
+
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes flap-shade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flap-shade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-frame {
+    animation: none;
+  }
+
+  // Flaps still render so the halves stay in sync, they just snap instead of flipping.
+  .flip-flap-top,
+  .flip-flap-bottom,
+  .flip-flap-top::after,
+  .flip-flap-bottom::after {
+    animation-duration: 0.01ms;
+    animation-delay: 0s;
+  }
+}

@@ -1,0 +1,27 @@
+<div class="flip-card-frame">
+  <div class="flip-card" [style.--flip-digits]="displayValue().length">
+    <div class="flip-half flip-half-top">
+      <span class="flip-value">{{ displayValue() }}</span>
+    </div>
+    <div class="flip-half flip-half-bottom">
+      <span class="flip-value">{{ previousDisplayValue() }}</span>
+    </div>
+
+    @if (isEvenFlip()) {
+      <ng-container [ngTemplateOutlet]="flaps" />
+    } @else {
+      <ng-container [ngTemplateOutlet]="flaps" />
+    }
+  </div>
+</div>
+
+<span class="flip-label">{{ label() }}</span>
+
+<ng-template #flaps>
+  <div class="flip-half flip-half-top flip-flap-top">
+    <span class="flip-value">{{ previousDisplayValue() }}</span>
+  </div>
+  <div class="flip-half flip-half-bottom flip-flap-bottom">
+    <span class="flip-value">{{ displayValue() }}</span>
+  </div>
+</ng-template>
